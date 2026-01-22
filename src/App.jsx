@@ -33,9 +33,7 @@ function App() {
     setCarrito(
       carrito
         .map((p) =>
-          p.id === id
-            ? { ...p, cantidad: p.cantidad - 1 }
-            : p
+          p.id === id ? { ...p, cantidad: p.cantidad - 1 } : p
         )
         .filter((p) => p.cantidad > 0)
     );
@@ -68,16 +66,16 @@ function App() {
         <div className="contenido">
           {/* CARRUSEL */}
           <section className="carousel">
-            <img src="/public/img/soportes/soporte-gato1.png" alt="banner" />
-            <img src="/public/img/soportes/soporte-gato2.png" alt="banner" />
-            <img src="/public/img/soportes/soporte-gato3.png" alt="banner" />
+            <img src="/img/soportes/soporte-gato1.png" alt="banner" />
+            <img src="/img/soportes/soporte-gato2.png" alt="banner" />
+            <img src="/img/soportes/soporte-gato3.png" alt="banner" />
           </section>
 
           {/* PRODUCTOS */}
           <div className="productos-grid">
             {productosFiltrados.map((p) => (
               <div className="card" key={p.id}>
-                <img src={p.imagenes} alt={p.nombre} />
+                <img src={p.imagen} alt={p.nombre} />
                 <h3>{p.nombre}</h3>
                 <p>${p.precio}</p>
                 <button onClick={() => agregarAlCarrito(p)}>
@@ -117,6 +115,7 @@ function App() {
 }
 
 export default App;
+
 
 
 

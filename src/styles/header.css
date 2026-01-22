@@ -1,61 +1,42 @@
 .header {
-  padding: 1.2rem 2rem;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #fbcfe8, #bfdbfe);
-  display: grid;
-  grid-template-columns: auto 1fr auto; /* 👈 3 zonas */
+  height: 90px;               /* ALTURA FIJA */
+  display: flex;
   align-items: center;
-  gap: 24px;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: linear-gradient(to right, #f9c5d1, #c5d9ff);
 }
 
 /* LOGO */
-.logo {
-  height: auto;
-  max-height: 64px;   /* 👈 límite real */
-  width: auto;
-  display: block;
+.header-logo {
+  display: flex;
+  align-items: center;
 }
 
+.logo {
+  height: 68px;               /* ACÁ está la clave */
+  width: auto;
+  object-fit: contain;
+}
 
-/* CONTROLES (buscador + filtro) */
+/* CONTROLES */
 .header-controls {
   display: flex;
-  justify-content: center;
-  gap: 14px;
-  max-width: 520px;   /* 👈 LÍMITE */
-  margin: 0 auto;     /* 👈 centro real */
+  gap: 12px;
 }
 
-/* BUSCADOR más chico */
 .buscador {
-  width: 400px;
-  padding: 10px 14px;
-  font-size: 15px;
-  border-radius: 10px;
-  border: 1px solid #cbd5e1;
+  height: 38px;
+  padding: 0 12px;
 }
 
-
-/* FILTRO */
 .filtro {
-  padding: 10px;
-  border-radius: 10px;
+  height: 38px;
 }
 
 /* REDES */
 .header-redes {
-  margin-left: auto;   /* 👈 empuja redes a la derecha */
   display: flex;
-  gap: 16px;           /* 👈 espacio entre iconos */
-}
-
-.header-redes a {
-  text-decoration: none;
-  color: inherit;
+  gap: 14px;
   font-size: 20px;
 }
-
-.header-redes a:hover {
-  opacity: 0.7;
-}
-

@@ -4,10 +4,11 @@ const productos = [
     nombre: "Llavero Soporte Celular",
     precio: 3000,
     categoria: "llaveros",
+    stock: 5,
     imagenes: [
-      "public/img/llaveros/llavero-simple1.png",
-      "public/img/llaveros/llavero-simple2.png",
-      "public/img/llaveros/llavero-simple3.png",
+      "/img/llaveros/llavero-simple1.png",
+      "/img/llaveros/llavero-simple2.png",
+      "/img/llaveros/llavero-simple3.png",
     ],
   },
   {
@@ -15,6 +16,7 @@ const productos = [
     nombre: "Dragon Soporte Celular",
     precio: 3000,
     categoria: "llaveros",
+    stock: 0,
     imagenes: [
       "/img/llaveros/llavero-dragon1.png",
       "/img/llaveros/llavero-dragon2.png",
@@ -26,6 +28,7 @@ const productos = [
     nombre: "Gato Adorable Soporte Celular",
     precio: 7000,
     categoria: "soportes",
+    stock: 3,
     imagenes: [
       "/img/soportes/soporte-gato1.png",
       "/img/soportes/soporte-gato2.png",
@@ -35,4 +38,5 @@ const productos = [
 ];
 
 export default productos;
+
 

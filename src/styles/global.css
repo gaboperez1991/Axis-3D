@@ -4,6 +4,13 @@
   padding: 0;
 }
 
+html,
+body {
+  width: 100%;
+  height: auto;
+  min-height: auto;
+}
+
 body {
   background-color: #ffffff;
   font-family: Arial, Helvetica, sans-serif;
@@ -17,8 +24,9 @@ body {
 input:focus,
 select:focus {
   outline: none;
-  border-color: #bfdbfe; /* azul suave acorde a tu gradiente */
+  border-color: #bfdbfe;
   box-shadow: 0 0 0 2px rgba(191, 219, 254, 0.6);
 }
+
 
 
