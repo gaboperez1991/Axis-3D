@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.app {
+  background-color: #ffffff;
+}
+
+/* Quitar borde negro por defecto */
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #bfdbfe; /* azul suave acorde a tu gradiente */
+  box-shadow: 0 0 0 2px rgba(191, 219, 254, 0.6);
+}
+
+

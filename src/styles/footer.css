@@ -1,0 +1,10 @@
+.footer {
+  margin-top: 3rem;
+  padding: 1.2rem;
+  border-radius: 18px;
+  text-align: center;
+  background: linear-gradient(135deg, #fbcfe8, #bfdbfe);
+  color: #1f2937;
+  font-weight: 500;
+}
+

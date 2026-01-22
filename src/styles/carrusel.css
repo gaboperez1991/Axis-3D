@@ -1,0 +1,10 @@
+.carousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+}
+
+.carousel img {
+  height: 160px;
+  border-radius: 12px;
+}

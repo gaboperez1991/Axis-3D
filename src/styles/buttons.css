@@ -1,0 +1,17 @@
+.boton-whatsapp {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #bbf7d0, #a7f3d0);
+  color: #065f46;
+  font-weight: 600;
+}
+
+.boton-whatsapp:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+

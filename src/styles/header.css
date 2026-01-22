@@ -1,0 +1,61 @@
+.header {
+  padding: 1.2rem 2rem;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fbcfe8, #bfdbfe);
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* 👈 3 zonas */
+  align-items: center;
+  gap: 24px;
+}
+
+/* LOGO */
+.logo {
+  height: auto;
+  max-height: 64px;   /* 👈 límite real */
+  width: auto;
+  display: block;
+}
+
+
+/* CONTROLES (buscador + filtro) */
+.header-controls {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  max-width: 520px;   /* 👈 LÍMITE */
+  margin: 0 auto;     /* 👈 centro real */
+}
+
+/* BUSCADOR más chico */
+.buscador {
+  width: 400px;
+  padding: 10px 14px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+}
+
+
+/* FILTRO */
+.filtro {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* REDES */
+.header-redes {
+  margin-left: auto;   /* 👈 empuja redes a la derecha */
+  display: flex;
+  gap: 16px;           /* 👈 espacio entre iconos */
+}
+
+.header-redes a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 20px;
+}
+
+.header-redes a:hover {
+  opacity: 0.7;
+}
+

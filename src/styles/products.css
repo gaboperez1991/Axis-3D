@@ -1,0 +1,38 @@
+.card-producto {
+  background: white;
+  border-radius: 18px;
+  padding: 1rem;
+  text-align: center;
+  position: relative;
+}
+
+.card-producto::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  padding: 2px;
+  background: linear-gradient(135deg, #fbcfe8, #bfdbfe);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 1rem;
+}
+
+.card-titulo {
+  color: #1f2937;
+  margin-bottom: 0.3rem;
+}
+
+.card-precio {
+  font-weight: bold;
+  color: #374151;
+}
+

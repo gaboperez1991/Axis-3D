@@ -1,0 +1,9 @@
+.cart {
+  background: white;
+  border-radius: 20px;
+  padding: 1.2rem;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(white, white) padding-box,
+    linear-gradient(135deg, #fbcfe8, #bfdbfe) border-box;
+}

@@ -1,0 +1,26 @@
+.layout {
+  max-width: 1400px;
+  margin: auto;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
+  background-color: #ffffff;
+}
+
+.contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.columna-carrito {
+  position: sticky;
+  top: 24px;
+  align-self: flex-start;
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
