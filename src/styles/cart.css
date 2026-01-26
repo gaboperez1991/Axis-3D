@@ -1,9 +1,78 @@
+/* CONTENEDOR GENERAL (columna derecha) */
+.columna-carrito {
+  position: sticky;
+  top: 24px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* CAJA DEL CARRITO */
 .cart {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
   background: white;
   border-radius: 20px;
   padding: 1.2rem;
+
   border: 2px solid transparent;
   background:
     linear-gradient(white, white) padding-box,
     linear-gradient(135deg, #fbcfe8, #bfdbfe) border-box;
 }
+
+/* TÍTULO */
+.cart h2 {
+  margin-bottom: 0.3rem;
+}
+
+/* ITEM DEL CARRITO */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* TOTAL */
+.cart h3 {
+  margin-top: 1rem;
+}
+
+/* BOTÓN VACIAR */
+.cart .vaciar {
+  margin-top: 0.8rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* INPUT NOMBRE CLIENTE */
+.input-nombre {
+  margin-top: 8px;
+  padding: 0.6rem;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  outline: none;
+}
+
+.input-nombre:focus {
+  border-color: #93c5fd;
+}
+
+/* BOTÓN WHATSAPP */
+.boton-whatsapp {
+  margin-top: 6px;
+  padding: 0.7rem;
+  border-radius: 12px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+

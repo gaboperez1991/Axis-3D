@@ -2,7 +2,7 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <img src="/axis3dv2.png" alt="Axis 3D Logo" className="footer-logo"/>
+        <img src="/src/assets/img/logo/axis3dv2.png" alt="Axis 3D Logo" className="footer-logo"/>
         <p>Impresiones 3D personalizadas</p>
 
         <div className="footer-redes">

@@ -6,9 +6,9 @@ const productos = [
     categoria: "llaveros",
     stock: 5,
     imagenes: [
-      "/img/llaveros/llavero-simple1.png",
-      "/img/llaveros/llavero-simple2.png",
-      "/img/llaveros/llavero-simple3.png",
+      "/src/assets/img/llaveros/llavero simple1.png",
+      "/src/assets/img/llaveros/llavero simple2.png",
+      "/src/assets/img/llaveros/llavero simple3.png",
     ],
   },
   {
@@ -16,11 +16,10 @@ const productos = [
     nombre: "Dragon Soporte Celular",
     precio: 3000,
     categoria: "llaveros",
-    stock: 0,
+    stock: 5,
     imagenes: [
-      "/img/llaveros/llavero-dragon1.png",
-      "/img/llaveros/llavero-dragon2.png",
-      "/img/llaveros/llavero-dragon3.png",
+      "/src/assets/img/llaveros/llavero dragon.png",
+      "/src/assets/img/llaveros/llavero dragon2.png",
     ],
   },
   {
@@ -30,9 +29,8 @@ const productos = [
     categoria: "soportes",
     stock: 3,
     imagenes: [
-      "/img/soportes/soporte-gato1.png",
-      "/img/soportes/soporte-gato2.png",
-      "/img/soportes/soporte-gato3.png",
+     "/src/assets/img/soportes/gatito.png",
+      "/src/assets/img/soportes/gatito2.png",
     ],
   },
 ];

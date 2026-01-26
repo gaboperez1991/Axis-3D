@@ -1,42 +1,55 @@
 .header {
-  height: 90px;               /* ALTURA FIJA */
+  background: linear-gradient(
+    90deg,
+    #fbcfe8,
+    #bfdbfe
+  );
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
-  background: linear-gradient(to right, #f9c5d1, #c5d9ff);
+  padding: 12px 24px;
+  gap: 20px;
 }
 
 /* LOGO */
-.header-logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  height: 68px;               /* ACÁ está la clave */
+.header-logo .logo {
+  height: 150px; /* 👈 agranda el logo */
   width: auto;
-  object-fit: contain;
 }
 
 /* CONTROLES */
 .header-controls {
   display: flex;
+  flex: 1;
   gap: 12px;
+  align-items: center;
 }
 
+/* BUSCADOR */
 .buscador {
-  height: 38px;
-  padding: 0 12px;
+  flex: 1;
+  height: 46px;
+  padding: 0 14px;
+  font-size: 16px;
+  border-radius: 8px;
 }
 
+/* FILTRO */
 .filtro {
-  height: 38px;
+  height: 46px;
+  padding: 0 10px;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 /* REDES */
 .header-redes {
   display: flex;
   gap: 14px;
-  font-size: 20px;
+  font-size: 26px; /* 👈 agranda íconos */
+}
+
+.header-redes a {
+  text-decoration: none;
 }

@@ -1,10 +1,38 @@
-.carousel {
+.carrusel {
   display: flex;
-  gap: 12px;
-  overflow-x: auto;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
 }
 
-.carousel img {
-  height: 160px;
-  border-radius: 12px;
+/* CONTENEDOR QUE RECORTA */
+.carrusel-viewport {
+  width: 420px;          /* 👈 tamaño más chico y elegante */
+  overflow: hidden;      /* 👈 CLAVE: no se ve la siguiente */
+  border-radius: 14px;
 }
+
+/* IMAGEN */
+.carrusel-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* BOTONES */
+.carrusel-btn {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #1f2937;
+}
+
+.carrusel-btn:hover {
+  opacity: 0.8;
+}
+
+

@@ -2,7 +2,7 @@ function Header({ busqueda, setBusqueda, categoria, setCategoria }) {
   return (
     <header className="header">
       <div className="header-logo">
-        <img src="/axis3dv2.png" alt="Axis 3D" className="logo" />
+        <img src="/src/assets/img/logo/axis3dv2.png" alt="Axis 3D" className="logo" />
       </div>
 
       <div className="header-controls">

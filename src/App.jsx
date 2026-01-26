@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 import Header from "./components/Header";
+import Carrusel from "./components/Carrusel";
+import ProductGrid from "./components/ProductGrid";
 import Cart from "./components/Cart";
 import BotonWhatsApp from "./components/BotonWhatsApp";
 import Footer from "./components/Footer";
@@ -64,29 +66,23 @@ function App() {
       <div className="layout">
         {/* COLUMNA IZQUIERDA */}
         <div className="contenido">
-          {/* CARRUSEL */}
-          <section className="carousel">
-            <img src="/img/soportes/soporte-gato1.png" alt="banner" />
-            <img src="/img/soportes/soporte-gato2.png" alt="banner" />
-            <img src="/img/soportes/soporte-gato3.png" alt="banner" />
-          </section>
+          <Carrusel
+  imagenes={[
+    "/src/assets/img/carrusel/efelante1.png",
+    "/src/assets/img/carrusel/gatito.png",
+    "/src/assets/img/carrusel/llavero dragon.png",
+    "/src/assets/img/carrusel/soporte elegante.png",
+  ]}
+/>
 
-          {/* PRODUCTOS */}
-          <div className="productos-grid">
-            {productosFiltrados.map((p) => (
-              <div className="card" key={p.id}>
-                <img src={p.imagen} alt={p.nombre} />
-                <h3>{p.nombre}</h3>
-                <p>${p.precio}</p>
-                <button onClick={() => agregarAlCarrito(p)}>
-                  Agregar
-                </button>
-              </div>
-            ))}
-          </div>
+
+          <ProductGrid
+            productos={productosFiltrados}
+            onAgregar={agregarAlCarrito}
+          />
         </div>
 
-        {/* COLUMNA DERECHA – CARRITO */}
+        {/* COLUMNA DERECHA */}
         <aside className="columna-carrito">
           <Cart
             carrito={carrito}
@@ -115,6 +111,8 @@ function App() {
 }
 
 export default App;
+
+
 
 
 
