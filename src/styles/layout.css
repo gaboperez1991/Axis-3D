@@ -1,25 +1,25 @@
 .layout {
-  max-width: 1400px;
-  margin: auto;
-  padding: 24px;
-
+  width: 100%;
+  max-width: 1800px; /* 👈 mucho más ancho */
+  margin: 0 auto;
+  padding: 24px 48px; /* más aire lateral */
   display: grid;
-  grid-template-columns: 1fr 340px;
+  grid-template-columns: minmax(0, 1fr) 360px;
   gap: 32px;
-
-  background-color: #ffffff;
   align-items: start;
 }
+
 
 /* COLUMNA IZQUIERDA */
 .contenido {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
 
-  /* 🔥 evita que el contenido invada la columna del carrito */
-  min-width: 0;
+  max-width: 1250px;   /* 👈 centra visualmente */
+  margin: 0 auto;      /* 👈 clave */
 }
+
 
 /* COLUMNA DERECHA */
 .columna-carrito {

@@ -92,3 +92,101 @@
   color: #dc2626;
 }
 
+.detalle-producto {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* MINIATURAS */
+.miniaturas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.miniaturas img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.2s;
+}
+
+.miniaturas img:hover,
+.miniaturas img.activa {
+  opacity: 1;
+  outline: 2px solid #3b82f6;
+}
+
+/* IMAGEN PRINCIPAL */
+.imagen-principal {
+  position: relative;
+}
+
+.imagen-principal img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 20px;
+  cursor: zoom-in;
+}
+
+/* INFO */
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.precio {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.btn-agregar {
+  background: #22c55e;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 14px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-agregar:hover {
+  background: #16a34a;
+}
+
+/* ZOOM OVERLAY */
+.zoom-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.zoom-overlay img {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 24px;
+}
+
+.zoom-overlay .cerrar {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: white;
+  border: none;
+  font-size: 22px;
+  padding: 8px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
