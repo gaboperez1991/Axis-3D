@@ -1,18 +1,7 @@
-/* CONTENEDOR GENERAL (columna derecha) */
-.columna-carrito {
-  position: sticky;
-  top: 24px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* CAJA DEL CARRITO */
 .cart {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.9rem;
 
   background: white;
   border-radius: 20px;
@@ -26,53 +15,88 @@
 
 /* TÍTULO */
 .cart h2 {
+  text-align: center;
+  font-size: 1.2rem;
   margin-bottom: 0.3rem;
+  color: #1f2937;
 }
 
-/* ITEM DEL CARRITO */
+/* VACÍO */
+.cart-vacio {
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* ITEM */
 .cart-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
 
   padding: 0.4rem 0;
   border-bottom: 1px solid #e5e7eb;
 }
 
-/* TOTAL */
-.cart h3 {
-  margin-top: 1rem;
+/* INFO */
+.cart-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.85rem;
+  color: #1f2937;
 }
 
-/* BOTÓN VACIAR */
-.cart .vaciar {
-  margin-top: 0.8rem;
-  padding: 0.5rem;
+/* ACCIONES */
+.cart-actions {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.cart-actions button {
+  border: none;
+  background: #f3f4f6;
   border-radius: 8px;
+  padding: 0.3rem 0.45rem;
   cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.15s ease, transform 0.1s ease;
 }
 
-/* INPUT NOMBRE CLIENTE */
-.input-nombre {
-  margin-top: 8px;
-  padding: 0.6rem;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-  outline: none;
+.cart-actions button:hover {
+  background: #e5e7eb;
+  transform: translateY(-1px);
 }
 
-.input-nombre:focus {
-  border-color: #93c5fd;
+.cart-eliminar {
+  color: #dc2626;
+  font-weight: bold;
 }
 
-/* BOTÓN WHATSAPP */
-.boton-whatsapp {
-  margin-top: 6px;
-  padding: 0.7rem;
+/* TOTAL */
+.cart-total {
+  margin-top: 0.8rem;
+  text-align: right;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* VACIAR */
+.cart .vaciar {
+  margin-top: 0.6rem;
+  padding: 0.5rem;
   border-radius: 12px;
   border: none;
-  font-weight: bold;
   cursor: pointer;
+
+  background: linear-gradient(135deg, #fbcfe8, #bfdbfe);
+  font-weight: 600;
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cart .vaciar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
 }
 

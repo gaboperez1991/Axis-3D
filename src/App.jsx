@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
 import Carrusel from "./components/Carrusel";
@@ -7,6 +8,7 @@ import Cart from "./components/Cart";
 import BotonWhatsApp from "./components/BotonWhatsApp";
 import Footer from "./components/Footer";
 
+import ProductDetail from "./pages/ProductDetail";
 import productos from "./data/productos";
 
 function App() {
@@ -15,7 +17,11 @@ function App() {
   const [categoria, setCategoria] = useState("");
   const [nombreCliente, setNombreCliente] = useState("");
 
-  const agregarAlCarrito = (producto) => {
+  /* =========================
+     CARRITO
+  ========================= */
+
+  const agregarUno = (producto) => {
     const existe = carrito.find((p) => p.id === producto.id);
 
     if (existe) {
@@ -31,17 +37,27 @@ function App() {
     }
   };
 
-  const quitarUno = (id) => {
-    setCarrito(
-      carrito
-        .map((p) =>
-          p.id === id ? { ...p, cantidad: p.cantidad - 1 } : p
-        )
-        .filter((p) => p.cantidad > 0)
-    );
+  const quitarUno = (id, eliminar = false) => {
+    if (eliminar) {
+      setCarrito(carrito.filter((p) => p.id !== id));
+    } else {
+      setCarrito(
+        carrito
+          .map((p) =>
+            p.id === id
+              ? { ...p, cantidad: p.cantidad - 1 }
+              : p
+          )
+          .filter((p) => p.cantidad > 0)
+      );
+    }
   };
 
   const vaciarCarrito = () => setCarrito([]);
+
+  /* =========================
+     FILTROS
+  ========================= */
 
   const productosFiltrados = productos.filter((p) => {
     const coincideBusqueda = p.nombre
@@ -55,62 +71,81 @@ function App() {
   });
 
   return (
-    <div className="app">
-      <Header
-        busqueda={busqueda}
-        setBusqueda={setBusqueda}
-        categoria={categoria}
-        setCategoria={setCategoria}
-      />
+    <BrowserRouter>
+      <div className="app">
+        <Header
+          busqueda={busqueda}
+          setBusqueda={setBusqueda}
+          categoria={categoria}
+          setCategoria={setCategoria}
+        />
 
-      <div className="layout">
-        {/* COLUMNA IZQUIERDA */}
-        <div className="contenido">
-          <Carrusel
-  imagenes={[
-    "/src/assets/img/carrusel/efelante1.png",
-    "/src/assets/img/carrusel/gatito.png",
-    "/src/assets/img/carrusel/llavero dragon.png",
-    "/src/assets/img/carrusel/soporte elegante.png",
-  ]}
-/>
+        <div className="layout">
+          {/* COLUMNA IZQUIERDA */}
+          <div className="contenido">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <Carrusel
+                      imagenes={[
+                        "/src/assets/img/carrusel/efelante1.png",
+                        "/src/assets/img/carrusel/gatito.png",
+                        "/src/assets/img/carrusel/llavero dragon.png",
+                        "/src/assets/img/carrusel/soporte elegante.png",
+                      ]}
+                    />
 
+                    <ProductGrid
+                      productos={productosFiltrados}
+                      onAgregar={agregarUno}
+                    />
+                  </>
+                }
+              />
 
-          <ProductGrid
-            productos={productosFiltrados}
-            onAgregar={agregarAlCarrito}
-          />
+              <Route
+                path="/producto/:id"
+                element={
+                  <ProductDetail onAgregar={agregarUno} />
+                }
+              />
+            </Routes>
+          </div>
+
+          {/* COLUMNA DERECHA */}
+          <aside className="columna-carrito">
+            <Cart
+              carrito={carrito}
+              agregarUno={agregarUno}
+              quitarUno={quitarUno}
+              vaciarCarrito={vaciarCarrito}
+            />
+
+            <input
+              className="input-nombre"
+              type="text"
+              placeholder="Tu nombre"
+              value={nombreCliente}
+              onChange={(e) => setNombreCliente(e.target.value)}
+            />
+
+            <BotonWhatsApp
+              carrito={carrito}
+              nombre={nombreCliente}
+            />
+          </aside>
         </div>
 
-        {/* COLUMNA DERECHA */}
-        <aside className="columna-carrito">
-          <Cart
-            carrito={carrito}
-            quitarUno={quitarUno}
-            vaciarCarrito={vaciarCarrito}
-          />
-
-          <input
-            className="input-nombre"
-            type="text"
-            placeholder="Tu nombre"
-            value={nombreCliente}
-            onChange={(e) => setNombreCliente(e.target.value)}
-          />
-
-          <BotonWhatsApp
-            carrito={carrito}
-            nombre={nombreCliente}
-          />
-        </aside>
+        <Footer />
       </div>
-
-      <Footer />
-    </div>
+    </BrowserRouter>
   );
 }
 
 export default App;
+
 
 
 

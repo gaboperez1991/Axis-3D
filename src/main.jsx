@@ -14,6 +14,7 @@ import "./styles/buscador.css";
 import "./styles/filtros.css";
 import "./styles/checkout.css";
 import "./styles/carrusel.css";
+import "./styles/productDetail.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
