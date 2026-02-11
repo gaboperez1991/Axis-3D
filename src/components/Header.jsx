@@ -1,11 +1,23 @@
+import { Link } from "react-router-dom";
+
+import { FaInstagram, FaTiktok } from "react-icons/fa";
+
 function Header({ busqueda, setBusqueda, categoria, setCategoria }) {
   return (
     <header className="header">
-      <div className="header-logo">
-        <img src="/src/assets/img/logo/axis3dv2.png" alt="Axis 3D" className="logo" />
-      </div>
+      <div className="header-inner">
 
-      <div className="header-controls">
+        <div className="header-logo">
+  <Link to="/">
+    <img
+      src="/src/assets/img/logo/axis3dv2.png"
+      alt="Axis 3D"
+      className="logo"
+    />
+  </Link>
+</div>
+
+
         <input
           className="buscador"
           type="text"
@@ -24,16 +36,24 @@ function Header({ busqueda, setBusqueda, categoria, setCategoria }) {
           <option value="soportes">Soportes</option>
           <option value="figuras">Figuras</option>
         </select>
-      </div>
 
-      <div className="header-redes">
-        <a href="#" aria-label="Instagram">📷</a>
-        <a href="#" aria-label="WhatsApp">💬</a>
+        <div className="header-redes">
+          <a href="#" target="_blank" rel="noreferrer">
+            <FaTiktok />
+          </a>
+
+          <a href="#" target="_blank" rel="noreferrer">
+            <FaInstagram />
+          </a>
+        </div>
+
       </div>
     </header>
   );
 }
 
 export default Header;
+
+
 
 

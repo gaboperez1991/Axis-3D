@@ -26,10 +26,13 @@
 ========================= */
 .productos-grid {
   display: grid;
-  grid-template-columns: repeat(2, 420px); /* 👈 igual al carrusel */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  justify-content: center;
+  width: 100%;
 }
+
+
+
 
 /* =========================
    CARD PRODUCTO
@@ -163,4 +166,22 @@
 .pagina-btn.activa {
   background: linear-gradient(135deg, #fbcfe8, #bfdbfe);
   font-weight: 600;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .productos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .productos-grid {
+    grid-template-columns: 1fr;
+  }
 }

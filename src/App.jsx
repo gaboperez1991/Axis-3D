@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+
+
 import Header from "./components/Header";
-import Carrusel from "./components/Carrusel";
+import Hero from "./components/Hero";
 import ProductGrid from "./components/ProductGrid";
 import Cart from "./components/Cart";
 import BotonWhatsApp from "./components/BotonWhatsApp";
 import Footer from "./components/Footer";
+import AdminDashboard from "./pages/AdminDashboard";
 
 import ProductDetail from "./pages/ProductDetail";
 import productos from "./data/productos";
@@ -16,10 +19,6 @@ function App() {
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("");
   const [nombreCliente, setNombreCliente] = useState("");
-
-  /* =========================
-     CARRITO
-  ========================= */
 
   const agregarUno = (producto) => {
     const existe = carrito.find((p) => p.id === producto.id);
@@ -55,10 +54,6 @@ function App() {
 
   const vaciarCarrito = () => setCarrito([]);
 
-  /* =========================
-     FILTROS
-  ========================= */
-
   const productosFiltrados = productos.filter((p) => {
     const coincideBusqueda = p.nombre
       .toLowerCase()
@@ -81,21 +76,13 @@ function App() {
         />
 
         <div className="layout">
-          {/* COLUMNA IZQUIERDA */}
           <div className="contenido">
             <Routes>
               <Route
                 path="/"
                 element={
                   <>
-                    <Carrusel
-                      imagenes={[
-                        "/src/assets/img/carrusel/efelante1.png",
-                        "/src/assets/img/carrusel/gatito.png",
-                        "/src/assets/img/carrusel/llavero dragon.png",
-                        "/src/assets/img/carrusel/soporte elegante.png",
-                      ]}
-                    />
+                    <Hero />
 
                     <ProductGrid
                       productos={productosFiltrados}
@@ -111,10 +98,11 @@ function App() {
                   <ProductDetail onAgregar={agregarUno} />
                 }
               />
+              <Route path="/admin" element={<AdminDashboard />} />
+
             </Routes>
           </div>
 
-          {/* COLUMNA DERECHA */}
           <aside className="columna-carrito">
             <Cart
               carrito={carrito}

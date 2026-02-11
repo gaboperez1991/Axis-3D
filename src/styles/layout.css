@@ -1,13 +1,16 @@
 .layout {
+  max-width: 1400px;   /* 👈 límite elegante */
   width: 100%;
-  max-width: 1800px; /* 👈 mucho más ancho */
-  margin: 0 auto;
-  padding: 24px 48px; /* más aire lateral */
+  margin: 0 auto;      /* 👈 centra todo */
+  padding: 24px;
+
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 32px;
+  grid-template-columns: 1fr 360px; /* productos + carrito */
+  gap: 40px;
+
   align-items: start;
 }
+
 
 
 /* COLUMNA IZQUIERDA */
@@ -30,6 +33,16 @@
   padding: 16px;
   border-radius: 18px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .columna-carrito {
+    position: relative;
+    top: auto;
+  }
 }
 
 
