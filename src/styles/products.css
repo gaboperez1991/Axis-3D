@@ -26,10 +26,13 @@
 ========================= */
 .productos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
   gap: 2rem;
   width: 100%;
+  min-height: 720px; /* ajustá según alto real de tus cards */
 }
+
 
 
 
@@ -61,10 +64,14 @@
   -webkit-mask: linear-gradient(#fff 0 0) content-box,
                 linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
+
+  mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
   mask-composite: exclude;
 
   pointer-events: none;
 }
+
 
 /* =========================
    IMAGEN
@@ -176,6 +183,7 @@
 @media (max-width: 992px) {
   .productos-grid {
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
   }
 }
 
@@ -183,5 +191,6 @@
 @media (max-width: 600px) {
   .productos-grid {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
 }

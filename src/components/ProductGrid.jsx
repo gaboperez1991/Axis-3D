@@ -3,17 +3,18 @@ import Producto from "./Producto";
 import "../styles/products.css";
 
 function ProductGrid({ productos, onAgregar }) {
-  const POR_PAGINA = 4;
+  const POR_PAGINA = 6;
   const [pagina, setPagina] = useState(1);
 
   const totalPaginas = Math.ceil(productos.length / POR_PAGINA);
 
-  // ⛑️ si la página queda fuera de rango al filtrar
-  if (pagina > totalPaginas && totalPaginas > 0) {
-    setPagina(1);
-  }
+  // Ajustamos la página de forma segura
+  const paginaActual =
+    totalPaginas === 0
+      ? 1
+      : Math.min(pagina, totalPaginas);
 
-  const inicio = (pagina - 1) * POR_PAGINA;
+  const inicio = (paginaActual - 1) * POR_PAGINA;
   const visibles = productos.slice(inicio, inicio + POR_PAGINA);
 
   return (
@@ -35,7 +36,7 @@ function ProductGrid({ productos, onAgregar }) {
           {Array.from({ length: totalPaginas }).map((_, i) => (
             <button
               key={i}
-              className={`pagina-btn ${pagina === i + 1 ? "activa" : ""}`}
+              className={`pagina-btn ${paginaActual === i + 1 ? "activa" : ""}`}
               onClick={() => setPagina(i + 1)}
             >
               {i + 1}
@@ -48,5 +49,7 @@ function ProductGrid({ productos, onAgregar }) {
 }
 
 export default ProductGrid;
+
+
 
 

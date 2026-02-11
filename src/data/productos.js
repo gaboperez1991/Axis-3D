@@ -35,7 +35,7 @@ const productos = [
   },
   {
     id: 4,
-    nombre: "Soporte Celular Efelante",
+    nombre: "Soporte Celular Elefante",
     precio: 4000,
     categoria: "soportes",
     stock: 5,
