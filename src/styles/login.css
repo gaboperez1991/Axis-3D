@@ -1,0 +1,116 @@
+/* =========================
+   LOGIN LAYOUT
+========================= */
+
+.login-container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #fbcfe8, #bfdbfe);
+}
+
+
+
+/* =========================
+   CARD
+========================= */
+
+.login-card {
+  background: white;
+  width: 100%;
+  max-width: 400px;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  margin: 0 auto;
+}
+
+
+
+.login-logo img {
+  max-width: 180px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 1rem auto;
+}
+
+
+
+
+.login-logo h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #374151;
+  margin-top: 0.5rem;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.login-form label {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 0.3rem;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  font-size: 0.95rem;
+  transition: 0.2s ease;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: #bfdbfe;
+  box-shadow: 0 0 0 3px rgba(191, 219, 254, 0.4);
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.login-btn {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ec4899, #6366f1);
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.25);
+}
+
+/* =========================
+   ERROR
+========================= */
+
+.login-error {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 0.7rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  text-align: center;
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import { AuthProvider } from "./context/AuthContext";
 
 // estilos globales
 import "./styles/global.css";
@@ -15,9 +16,16 @@ import "./styles/filtros.css";
 import "./styles/checkout.css";
 import "./styles/carrusel.css";
 import "./styles/productDetail.css";
+import "./styles/admin.css";
+import "./styles/login.css";
+
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </React.StrictMode>
 );
+

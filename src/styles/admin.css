@@ -1,0 +1,267 @@
+/* =========================
+   LAYOUT
+========================= */
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f3f4f6;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.admin-sidebar {
+  width: 240px;
+  background: linear-gradient(180deg, #fbcfe8, #bfdbfe);
+  padding: 2rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.admin-logo-img {
+  width: 120px;
+  margin-bottom: 1rem;
+}
+
+.admin-logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-btn {
+  width: 100%;
+  padding: 0.7rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.6);
+  font-weight: 600;
+}
+
+.sidebar-btn.active {
+  background: white;
+}
+
+.logout-btn {
+  padding: 0.6rem;
+  border: none;
+  border-radius: 10px;
+  background: #1f2937;
+  color: white;
+  cursor: pointer;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.admin-main {
+  flex: 1;
+  padding: 2rem;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.admin-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.admin-topbar h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.admin-user {
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* =========================
+   STATS
+========================= */
+
+.admin-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.2rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+  min-width: 180px;
+}
+
+.stat-card h3 {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.stat-card p {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 0.4rem;
+}
+
+/* =========================
+   FORM CARD
+========================= */
+
+.admin-form-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+}
+
+.admin-form-card h2 {
+  margin-bottom: 1.5rem;
+}
+
+/* =========================
+   TABLA
+========================= */
+
+.admin-table-container {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 0.8rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+  font-weight: 600;
+}
+
+.admin-table td {
+  padding: 0.8rem;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 0.95rem;
+}
+
+.admin-table tr:hover {
+  background: #f9fafb;
+}
+
+.admin-thumb {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.acciones {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit-btn {
+  background: #e5e7eb;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background: #d1d5db;
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+/* =========================
+   FORM STYLES
+========================= */
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.form-group input {
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 0.9rem;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #bfdbfe;
+  box-shadow: 0 0 0 2px rgba(191,219,254,0.4);
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.save-btn {
+  margin-top: 1rem;
+  padding: 0.7rem;
+  border-radius: 10px;
+  border: none;
+  background: #1f2937;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.save-btn:hover {
+  background: #111827;
+}
+

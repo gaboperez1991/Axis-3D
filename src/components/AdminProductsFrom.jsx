@@ -1,101 +1,93 @@
 import { useState } from "react";
 
-const estadoInicial = {
-  nombre: "",
-  precio: "",
-  stock: "",
-  categoria: "",
-  imagenes: [""],
-};
-
 function AdminProductForm({ onGuardar, productoEditar }) {
-  const [form, setForm] = useState(() =>
-    productoEditar
-      ? {
-          ...productoEditar,
-          imagenes: [...(productoEditar.imagenes || [""])],
-        }
-      : estadoInicial
-  );
+  const initialState = {
+    nombre: productoEditar?.nombre || "",
+    precio: productoEditar?.precio || "",
+    stock: productoEditar?.stock || "",
+    imagenes: productoEditar?.imagenes || [""],
+  };
+
+  const [form, setForm] = useState(initialState);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleImagenChange = (e) => {
-    setForm((prev) => ({
-      ...prev,
-      imagenes: [e.target.value],
-    }));
+    if (name === "imagen") {
+      setForm({ ...form, imagenes: [value] });
+    } else {
+      setForm({ ...form, [name]: value });
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    onGuardar(form);
 
-    onGuardar({
-      ...form,
-      precio: Number(form.precio),
-      stock: Number(form.stock),
+    setForm({
+      nombre: "",
+      precio: "",
+      stock: "",
+      imagenes: [""],
     });
-
-    setForm(estadoInicial);
   };
 
   return (
     <form className="admin-form" onSubmit={handleSubmit}>
-      <input
-        name="nombre"
-        placeholder="Nombre"
-        value={form.nombre}
-        onChange={handleChange}
-        required
-      />
+      <div className="form-group">
+        <label>Nombre del producto</label>
+        <input
+          type="text"
+          name="nombre"
+          value={form.nombre}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-      <input
-        name="precio"
-        type="number"
-        placeholder="Precio"
-        value={form.precio}
-        onChange={handleChange}
-        required
-      />
+      <div className="form-row">
+        <div className="form-group">
+          <label>Precio</label>
+          <input
+            type="number"
+            name="precio"
+            value={form.precio}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-      <input
-        name="stock"
-        type="number"
-        placeholder="Stock"
-        value={form.stock}
-        onChange={handleChange}
-        required
-      />
+        <div className="form-group">
+          <label>Stock</label>
+          <input
+            type="number"
+            name="stock"
+            value={form.stock}
+            onChange={handleChange}
+            required
+          />
+        </div>
+      </div>
 
-      <input
-        name="categoria"
-        placeholder="Categoría"
-        value={form.categoria}
-        onChange={handleChange}
-        required
-      />
+      <div className="form-group">
+        <label>URL de Imagen</label>
+        <input
+          type="text"
+          name="imagen"
+          value={form.imagenes[0]}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-      <input
-        name="imagenes"
-        placeholder="URL Imagen"
-        value={form.imagenes[0]}
-        onChange={handleImagenChange}
-        required
-      />
-
-      <button type="submit">
-        {productoEditar ? "Actualizar" : "Crear Producto"}
+      <button className="save-btn" type="submit">
+        {productoEditar ? "Actualizar Producto" : "Crear Producto"}
       </button>
     </form>
   );
 }
 
 export default AdminProductForm;
+
+
 

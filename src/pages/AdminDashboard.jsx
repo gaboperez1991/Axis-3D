@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 import productosData from "../data/productos";
 import AdminProductForm from "../components/AdminProductsFrom";
 
 function AdminDashboard() {
+  const { logout } = useAuth();
   const [productos, setProductos] = useState(productosData);
   const [editando, setEditando] = useState(null);
 
@@ -12,19 +14,14 @@ function AdminDashboard() {
 
   const guardarProducto = (producto) => {
     if (producto.id) {
-      // editar
       setProductos((prev) =>
-        prev.map((p) =>
-          p.id === producto.id ? producto : p
-        )
+        prev.map((p) => (p.id === producto.id ? producto : p))
       );
     } else {
-      // nuevo
       const nuevo = {
         ...producto,
         id: Date.now(),
       };
-
       setProductos((prev) => [...prev, nuevo]);
     }
 
@@ -32,40 +29,117 @@ function AdminDashboard() {
   };
 
   return (
-    <div className="admin-container">
-      <h2 className="admin-title">Panel Admin - Axis 3D</h2>
+    <div className="admin-layout">
+      {/* SIDEBAR */}
+      <aside className="admin-sidebar">
+        <div>
+          <img
+            src="/src/assets/img/logo/axis3dv2.png"
+            alt="Axis 3D"
+            className="admin-logo-img"
+          />
+          <h2 className="admin-logo">Axis 3D</h2>
 
-      <AdminProductForm
-        key={editando?.id || "nuevo"}
-        onGuardar={guardarProducto}
-        productoEditar={editando}
-      />
+          <nav>
+            <button className="sidebar-btn active">
+              Productos
+            </button>
+          </nav>
+        </div>
 
-      <div className="admin-list">
-        {productos.map((p) => (
-          <div key={p.id} className="admin-card">
-            <img src={p.imagenes[0]} alt={p.nombre} />
-            <div>
-              <h4>{p.nombre}</h4>
-              <p>${p.precio}</p>
-              <p>Stock: {p.stock}</p>
-            </div>
+        <button className="logout-btn" onClick={logout}>
+          Cerrar sesión
+        </button>
+      </aside>
 
-            <div className="admin-actions">
-              <button onClick={() => setEditando(p)}>
-                Editar
-              </button>
+      {/* MAIN */}
+      <main className="admin-main">
+        {/* TOPBAR */}
+        <div className="admin-topbar">
+          <h1>Dashboard</h1>
 
-              <button onClick={() => eliminarProducto(p.id)}>
-                Eliminar
-              </button>
-            </div>
+          <div className="admin-user">
+            Administrador
           </div>
-        ))}
-      </div>
+        </div>
+
+        {/* MÉTRICAS */}
+        <div className="admin-stats">
+          <div className="stat-card">
+            <h3>Total productos</h3>
+            <p>{productos.length}</p>
+          </div>
+        </div>
+
+        {/* FORMULARIO */}
+        <div className="admin-form-card">
+          <h2>Agregar / Editar Producto</h2>
+
+          <AdminProductForm
+            key={editando?.id || "nuevo"}
+            onGuardar={guardarProducto}
+            productoEditar={editando}
+          />
+        </div>
+
+        {/* TABLA */}
+        <div className="admin-table-container">
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {productos.map((p) => (
+                <tr key={p.id}>
+                  <td>
+                    <img
+                      src={p.imagenes[0]}
+                      alt={p.nombre}
+                      className="admin-thumb"
+                    />
+                  </td>
+
+                  <td>{p.nombre}</td>
+                  <td>${p.precio}</td>
+                  <td>{p.stock}</td>
+
+                  <td className="acciones">
+                    <button
+                      className="edit-btn"
+                      onClick={() => setEditando(p)}
+                    >
+                      Editar
+                    </button>
+
+                    <button
+                      className="delete-btn"
+                      onClick={() => eliminarProducto(p.id)}
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </main>
     </div>
   );
 }
 
 export default AdminDashboard;
+
+
+
+
+
+
 
