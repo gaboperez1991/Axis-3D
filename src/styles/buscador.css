@@ -1,9 +1,13 @@
 .buscador {
-  flex: 1;
+  width: 100%;
+  max-width: 650px;
+
   padding: 0.7rem 1rem;
   border-radius: 14px;
   border: 2px solid transparent;
+
   background:
     linear-gradient(white, white) padding-box,
     linear-gradient(135deg, #fbcfe8, #bfdbfe) border-box;
 }
+

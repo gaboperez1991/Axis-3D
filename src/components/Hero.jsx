@@ -17,7 +17,7 @@ function Hero() {
           Desde decoración hasta soluciones técnicas.
         </p>
 
-        <Link to="/" className="hero-boton">
+        <Link to="/productos" className="btn-ver-productos">
           Ver Productos
         </Link>
       </div>

@@ -11,26 +11,25 @@ import AdminDashboard from "./pages/AdminDashboard";
 import ProductDetail from "./pages/ProductDetail";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ProductosPage from "./pages/ProductosPage";
 import productos from "./data/productos";
 
 function AppContent() {
-
   const location = useLocation();
 
   const [carrito, setCarrito] = useState([]);
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("");
+  const [orden, setOrden] = useState("");
   const [nombreCliente, setNombreCliente] = useState("");
 
   const esAdmin = location.pathname.startsWith("/admin");
   const esLogin = location.pathname === "/login";
 
   const agregarUno = (producto) => {
-
     const existe = carrito.find((p) => p.id === producto.id);
 
     if (existe) {
-
       setCarrito(
         carrito.map((p) =>
           p.id === producto.id
@@ -38,23 +37,15 @@ function AppContent() {
             : p
         )
       );
-
     } else {
-
       setCarrito([...carrito, { ...producto, cantidad: 1 }]);
-
     }
-
   };
 
   const quitarUno = (id, eliminar = false) => {
-
     if (eliminar) {
-
       setCarrito(carrito.filter((p) => p.id !== id));
-
     } else {
-
       setCarrito(
         carrito
           .map((p) =>
@@ -64,46 +55,41 @@ function AppContent() {
           )
           .filter((p) => p.cantidad > 0)
       );
-
     }
-
   };
 
   const vaciarCarrito = () => setCarrito([]);
 
-  const productosFiltrados = productos.filter((p) => {
+  const productosFiltrados = productos
+    .filter((p) => {
+      const coincideBusqueda =
+        p.nombre.toLowerCase().includes(busqueda.toLowerCase());
 
-    const coincideBusqueda =
-      p.nombre.toLowerCase().includes(busqueda.toLowerCase());
+      const coincideCategoria =
+        categoria === "" || p.categoria === categoria;
 
-    const coincideCategoria =
-      categoria === "" || p.categoria === categoria;
-
-    return coincideBusqueda && coincideCategoria;
-
-  });
+      return coincideBusqueda && coincideCategoria;
+    })
+    .sort((a, b) => {
+      if (orden === "precio-asc") return a.precio - b.precio;
+      if (orden === "precio-desc") return b.precio - a.precio;
+      if (orden === "az") return a.nombre.localeCompare(b.nombre);
+      if (orden === "za") return b.nombre.localeCompare(a.nombre);
+      return 0;
+    });
 
   return (
-
     <div className="app">
-
-      {/* HEADER */}
       {!esLogin && !esAdmin && (
-
         <Header
           busqueda={busqueda}
           setBusqueda={setBusqueda}
-          categoria={categoria}
-          setCategoria={setCategoria}
         />
-
       )}
 
-      <div className="layout">
+      <div className="layout container">
 
-        {/* CONTENIDO */}
         <div className="contenido">
-
           <Routes>
 
             <Route
@@ -111,9 +97,8 @@ function AppContent() {
               element={
                 <>
                   <Hero />
-
                   <ProductGrid
-                    productos={productosFiltrados}
+                    productos={productos.slice(0, 3)}
                     onAgregar={agregarUno}
                   />
                 </>
@@ -121,16 +106,27 @@ function AppContent() {
             />
 
             <Route
-              path="/producto/:id"
+              path="/productos"
               element={
-                <ProductDetail onAgregar={agregarUno} />
+                <ProductosPage
+                  productos={productosFiltrados}
+                  busqueda={busqueda}
+                  setBusqueda={setBusqueda}
+                  categoria={categoria}
+                  setCategoria={setCategoria}
+                  orden={orden}
+                  setOrden={setOrden}
+                  onAgregar={agregarUno}
+                />
               }
             />
 
             <Route
-              path="/login"
-              element={<Login />}
+              path="/producto/:id"
+              element={<ProductDetail onAgregar={agregarUno} />}
             />
+
+            <Route path="/login" element={<Login />} />
 
             <Route
               path="/admin"
@@ -142,14 +138,10 @@ function AppContent() {
             />
 
           </Routes>
-
         </div>
 
-        {/* CARRITO */}
         {!esAdmin && !esLogin && (
-
           <aside className="columna-carrito">
-
             <Cart
               carrito={carrito}
               agregarUno={agregarUno}
@@ -167,40 +159,30 @@ function AppContent() {
               }
             />
 
-            {/* BOTON FINALIZAR POR WHATSAPP RESTAURADO */}
             <BotonWhatsApp
               carrito={carrito}
               nombre={nombreCliente}
             />
-
           </aside>
-
         )}
-
       </div>
 
-      {/* FOOTER */}
       {!esLogin && !esAdmin && <Footer />}
-
     </div>
-
   );
-
 }
 
 function App() {
-
   return (
-
     <BrowserRouter>
       <AppContent />
     </BrowserRouter>
-
   );
-
 }
 
 export default App;
+
+
 
 
 

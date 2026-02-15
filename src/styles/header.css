@@ -1,11 +1,10 @@
-/* HEADER FONDO COMPLETO */
 .header {
   width: 100%;
   background: linear-gradient(90deg, #fbcfe8, #bfdbfe);
   padding: 0 2rem;
+
 }
 
-/* CONTENIDO CENTRADO */
 .header-inner {
   max-width: 1400px;
   margin: 0 auto;
@@ -16,62 +15,22 @@
   gap: 2rem;
 }
 
-/* LOGO */
+
+/* Logo */
 .logo {
   height: 90px;
+  justify-self: start;
 }
 
-/* BUSCADOR */
-.buscador {
-  flex: 1;
-  max-width: 500px;
-  height: 44px;
-  padding: 0 16px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-  font-size: 15px;
-}
-
-/* FILTRO */
-.filtro {
-  height: 44px;
-  padding: 0 12px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-/* REDES */
-.header-redes {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  font-size: 32px;
-}
+/* Redes */
 
 .header-redes a {
-  color: #1f2937;
-  transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+  margin-left: 25px;
+  font-size: 25px;
+  color: #333;
 }
 
-.header-redes a:hover {
-  transform: scale(1.15);
-  opacity: 0.85;
-}
 
-.header-redes a:first-child:hover {
-  color: #000; /* TikTok */
-}
 
-.header-redes a:last-child:hover {
-  color: #e1306c; /* Instagram */
-}
-
-.header-logo a {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
 
 

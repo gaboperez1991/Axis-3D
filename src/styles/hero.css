@@ -60,4 +60,19 @@
   object-fit: cover;
   border-radius: 20px;
 }
+.btn-ver-productos {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  background-color: white;
+  color: #1f2937;
+  font-weight: 600;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-ver-productos:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+}
 

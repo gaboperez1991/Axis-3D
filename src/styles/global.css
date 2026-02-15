@@ -21,6 +21,15 @@ body {
   background-color: #f3f4f6;
 }
 
+.container {
+  max-width: 1400px;   /* igual que layout */
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+}
+
+
+
 /* Quitar borde negro por defecto */
 input:focus,
 select:focus {
@@ -50,4 +59,18 @@ select:focus {
   box-shadow: 0 0 0 2px rgba(191, 219, 254, 0.5);
 }
 
+
+.layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.contenido {
+  flex: 1;
+}
+
+.columna-carrito {
+  width: 300px;
+}
 
