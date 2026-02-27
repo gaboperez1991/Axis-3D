@@ -1,32 +1,109 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
-import productosData from "../data/productos";
+
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  query,
+  orderBy,
+} from "firebase/firestore";
+import { db } from "../firebase/config";
+
 import AdminProductForm from "../components/AdminProductsFrom";
+import "../styles/products.css";
 
 function AdminDashboard() {
   const { logout } = useAuth();
-  const [productos, setProductos] = useState(productosData);
+  const [productos, setProductos] = useState([]);
   const [editando, setEditando] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const eliminarProducto = (id) => {
-    setProductos((prev) => prev.filter((p) => p.id !== id));
-  };
+  const productsCollectionRef = collection(db, "products");
 
-  const guardarProducto = (producto) => {
-    if (producto.id) {
-      setProductos((prev) =>
-        prev.map((p) => (p.id === producto.id ? producto : p))
-      );
-    } else {
-      const nuevo = {
-        ...producto,
-        id: Date.now(),
-      };
-      setProductos((prev) => [...prev, nuevo]);
+  useEffect(() => {
+    const getProducts = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const q = query(productsCollectionRef, orderBy("nombre", "asc"));
+        const data = await getDocs(q);
+        const productsArray = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setProductos(productsArray);
+      } catch (err) {
+        console.error("Error al cargar productos en Admin Dashboard:", err);
+        setError("Error al cargar productos.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getProducts();
+  }, [productsCollectionRef]); // Se ejecuta solo una vez al cargar el componente
+
+  const eliminarProducto = async (id) => {
+    try {
+      const productDoc = doc(db, "products", id);
+      await deleteDoc(productDoc);
+      setProductos((prev) => prev.filter((p) => p.id !== id));
+      console.log(`Producto con ID ${id} eliminado correctamente.`);
+    } catch (err) {
+      console.error("Error al eliminar producto:", err);
+      setError("Error al eliminar el producto.");
     }
-
-    setEditando(null);
   };
+
+  const guardarProducto = async (producto) => {
+    setLoading(true);
+    setError(null);
+    try {
+      if (producto.id) {
+        // Si el producto tiene un ID, lo actualizamos
+        const productDoc = doc(db, "products", producto.id);
+        // MODIFICACIÓN AQUÍ: Renombramos 'id' a '_unusedId' para evitar la advertencia del linter
+        const { id: _unusedId, ...productoSinId } = producto; 
+        await updateDoc(productDoc, productoSinId);
+        setProductos((prev) =>
+          prev.map((p) => (p.id === producto.id ? producto : p))
+        );
+        console.log(`Producto con ID ${producto.id} actualizado correctamente.`);
+      } else {
+        // Si no tiene ID, es un producto nuevo, lo agregamos
+        const docRef = await addDoc(productsCollectionRef, producto);
+        setProductos((prev) => [...prev, { ...producto, id: docRef.id }]);
+        console.log(`Nuevo producto agregado con ID ${docRef.id}.`);
+      }
+      setEditando(null);
+    } catch (err) {
+      console.error("Error al guardar producto:", err);
+      setError("Error al guardar el producto.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading && productos.length === 0) {
+    return (
+      <div className="admin-layout">
+        <p>Cargando productos del administrador...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="admin-layout">
+        <p className="error-message">Error: {error}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="admin-layout">
@@ -100,7 +177,7 @@ function AdminDashboard() {
                 <tr key={p.id}>
                   <td>
                     <img
-                      src={p.imagenes[0]}
+                      src={p.imagenes && p.imagenes[0]}
                       alt={p.nombre}
                       className="admin-thumb"
                     />
@@ -136,6 +213,9 @@ function AdminDashboard() {
 }
 
 export default AdminDashboard;
+
+
+
 
 
 
