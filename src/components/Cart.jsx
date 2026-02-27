@@ -7,7 +7,7 @@ function Cart({
   vaciarCarrito,
 }) {
   const total = carrito.reduce(
-    (acc, p) => acc + p.precio * p.cantidad,
+    (acc, p) => acc + p.price * p.cantidad,
     0
   );
 

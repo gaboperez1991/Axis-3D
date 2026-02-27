@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react"; // Añadimos useEffect para la carga de datos
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-
-// Importamos las funciones de Firestore necesarias y la instancia de db
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../src/firebase/config"; // Asegúrate de que la ruta a tu archivo config.js sea correcta
+import { supabase } from "./supabaseClient";
 
 import Header from "./components/Header";
 import Hero from "./components/Hero";
@@ -11,12 +8,8 @@ import ProductGrid from "./components/ProductGrid";
 import Cart from "./components/Cart";
 import BotonWhatsApp from "./components/BotonWhatsApp";
 import Footer from "./components/Footer";
-import AdminDashboard from "./pages/AdminDashboard";
 import ProductDetail from "./pages/ProductDetail";
-import Login from "./pages/Login";
-import ProtectedRoute from "./components/ProtectedRoute";
 import ProductosPage from "./pages/ProductosPage";
-// REMOVIDO: import productos from "./data/productos"; // Ya no necesitamos este archivo local
 
 function AppContent() {
   const location = useLocation();
@@ -26,39 +19,39 @@ function AppContent() {
   const [categoria, setCategoria] = useState("");
   const [orden, setOrden] = useState("");
   const [nombreCliente, setNombreCliente] = useState("");
-
-  // NUEVO: Estado para almacenar los productos de Firestore
-  const [firestoreProducts, setFirestoreProducts] = useState([]);
-  // NUEVO: Estado para manejar el estado de carga
+  const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // NUEVO: useEffect para cargar los productos desde Firestore cuando el componente se monta
   useEffect(() => {
-    const getProducts = async () => {
-      setLoading(true); // Indicamos que estamos cargando
-      try {
-        // Obtenemos una referencia a la colección 'products' en Firestore
-        // ¡IMPORTANTE!: Asegúrate de que el nombre de tu colección en Firestore sea 'products'
-        const productsCollectionRef = collection(db, "products");
-        const data = await getDocs(productsCollectionRef);
-        const productsArray = data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id, // Incluimos el ID del documento como 'id' del producto
+    const fetchProductos = async () => {
+      setLoading(true);
+
+      const { data, error } = await supabase
+        .from("Productos")
+        .select("*");
+
+      if (error) {
+        console.error("Error trayendo productos:", error);
+      } else {
+        // 🔥 Adaptamos los campos de Supabase a tu estructura actual
+        const productosFormateados = data.map((p) => ({
+          id: p.id,
+          nombre: p.name,
+          descripcion: p.description,
+          precio: Number(p.price),
+          imagenes: [p.image_url],
+          stock: p.stock ?? 10,
         }));
-        setFirestoreProducts(productsArray); // Guardamos los productos en el estado
-      } catch (error) {
-        console.error("Error al obtener productos de Firestore:", error);
-        // Aquí podrías manejar el error, por ejemplo, mostrando un mensaje al usuario
-      } finally {
-        setLoading(false); // Terminamos la carga, independientemente del resultado
+
+        console.log("Productos desde Supabase:", productosFormateados);
+        setProductos(productosFormateados);
       }
+
+      setLoading(false);
     };
 
-    getProducts(); // Llamamos a la función para obtener los productos
-  }, []); // El array vacío asegura que esto se ejecute solo una vez al montar el componente
-
-  const esAdmin = location.pathname.startsWith("/admin");
-  const esLogin = location.pathname === "/login";
+    fetchProductos();
+  }, []);
 
   const agregarUno = (producto) => {
     const existe = carrito.find((p) => p.id === producto.id);
@@ -94,8 +87,7 @@ function AppContent() {
 
   const vaciarCarrito = () => setCarrito([]);
 
-  // Usamos 'firestoreProducts' en lugar de 'productos' del archivo local
-  const productosFiltrados = firestoreProducts
+  const productosFiltrados = productos
     .filter((p) => {
       const coincideBusqueda =
         p.nombre.toLowerCase().includes(busqueda.toLowerCase());
@@ -113,23 +105,13 @@ function AppContent() {
       return 0;
     });
 
-  // NUEVO: Mostrar un mensaje de carga mientras se obtienen los productos
   if (loading) {
-    return (
-      <div className="app">
-        <p>Cargando productos...</p>
-      </div>
-    );
+    return <p style={{ padding: "2rem" }}>Cargando productos...</p>;
   }
 
   return (
     <div className="app">
-      {!esLogin && !esAdmin && (
-        <Header
-          busqueda={busqueda}
-          setBusqueda={setBusqueda}
-        />
-      )}
+      <Header busqueda={busqueda} setBusqueda={setBusqueda} />
 
       <div className="layout container">
         <div className="contenido">
@@ -139,9 +121,8 @@ function AppContent() {
               element={
                 <>
                   <Hero />
-                  {/* Pasamos los productos de Firestore al ProductGrid */}
                   <ProductGrid
-                    productos={firestoreProducts.slice(0, 3)} // O la lógica que necesites para los productos destacados
+                    productos={productos}
                     onAgregar={agregarUno}
                   />
                 </>
@@ -152,7 +133,7 @@ function AppContent() {
               path="/productos"
               element={
                 <ProductosPage
-                  productos={productosFiltrados} // Pasamos los productos filtrados de Firestore
+                  productos={productosFiltrados}
                   busqueda={busqueda}
                   setBusqueda={setBusqueda}
                   categoria={categoria}
@@ -168,48 +149,35 @@ function AppContent() {
               path="/producto/:id"
               element={<ProductDetail onAgregar={agregarUno} />}
             />
-
-            <Route path="/login" element={<Login />} />
-
-            <Route
-              path="/admin"
-              element={
-                <ProtectedRoute>
-                  <AdminDashboard />
-                </ProtectedRoute>
-              }
-            />
           </Routes>
         </div>
 
-        {!esAdmin && !esLogin && (
-          <aside className="columna-carrito">
-            <Cart
-              carrito={carrito}
-              agregarUno={agregarUno}
-              quitarUno={quitarUno}
-              vaciarCarrito={vaciarCarrito}
-            />
+        <aside className="columna-carrito">
+          <Cart
+            carrito={carrito}
+            agregarUno={agregarUno}
+            quitarUno={quitarUno}
+            vaciarCarrito={vaciarCarrito}
+          />
 
-            <input
-              className="input-nombre"
-              type="text"
-              placeholder="Tu nombre"
-              value={nombreCliente}
-              onChange={(e) =>
-                setNombreCliente(e.target.value)
-              }
-            />
+          <input
+            className="input-nombre"
+            type="text"
+            placeholder="Tu nombre"
+            value={nombreCliente}
+            onChange={(e) =>
+              setNombreCliente(e.target.value)
+            }
+          />
 
-            <BotonWhatsApp
-              carrito={carrito}
-              nombre={nombreCliente}
-            />
-          </aside>
-        )}
+          <BotonWhatsApp
+            carrito={carrito}
+            nombre={nombreCliente}
+          />
+        </aside>
       </div>
 
-      {!esLogin && !esAdmin && <Footer />}
+      <Footer />
     </div>
   );
 }
@@ -223,8 +191,6 @@ function App() {
 }
 
 export default App;
-
-
 
 
 
